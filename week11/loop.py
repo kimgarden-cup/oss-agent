@@ -93,7 +93,7 @@ def run(question):
 
             # [빈칸 2] 이름으로 함수를 찾기
             #   FUNCTIONS 사전에서 name 에 해당하는 함수를 꺼내 func 에 담는다
-            func = None
+            func = FUNCTIONS[name]
             if func is None:
                 stop_at_blank(2, "96", f"FUNCTIONS 사전에서 '{name}' 함수를 꺼내 func 에 담을 것.")
             result = func(**args)
@@ -102,7 +102,7 @@ def run(question):
             # [빈칸 3] 결과를 대화에 다시 넣기
             #   role 은 "tool", 어느 호출의 결과인지(tool_call_id),
             #   도구 이름(name), 결과(content)
-            tool_message = None
+            tool_message = {"role": "tool", "tool_call_id": call["id"], "name": name, "content": str(result)}
             if tool_message is None:
                 stop_at_blank(3, "105", "결과를 대화에 넣을 메시지를 만들 것. "
                                            "넣지 않으면 모델은 결과를 모름.")
