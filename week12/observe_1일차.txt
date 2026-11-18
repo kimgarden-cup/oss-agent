@@ -1,34 +1,34 @@
 12주차 1일차 실습  (11월 17일)
-이름:
-학번:
+이름: 김정원
+학번: 20231351
 
 번호 뒤에 한두 줄로 적는다. (화면에 나온 것 복사 붙여넣기 가능)
 
-1. claude --version 결과:
+1. claude --version 결과: 2.1.326 (Claude Code)
 
 2. 스킬 없이 물었을 때 (6단계)
-   2-1. 읽은 파일:
-   2-2. 권한 요청 횟수:
-   2-3. 실행한 명령:
-   2-4. 최종 답:
+   2-1. 읽은 파일: 폴더 전체 파일 목록을 본 뒤 tools.py, observe_1일차.txt 를 읽음
+   2-2. 권한 요청 횟수: 1번 (python 실행 명령)
+   2-3. 실행한 명령: Get-ChildItem -Recurse -File (파일 목록) / & ".\.venv\Scripts\python.exe" -c "from tools import get_boxoffice_rank_1; print(get_boxoffice_rank_1('20261114'))"
+   2-4. 최종 답: 2026년 11월 14일 박스오피스 1위는 「극장판 치이카와: 인어 섬의 비밀」
 
 3. /clear 뒤 같은 질문 (7단계)
-   3-1. tools.py 를 또 찾아 읽었나:
-   3-2. 실행한 명령이 2번과 같았나:
-   3-3. 권한 요청 횟수:
+   3-1. tools.py 를 또 찾아 읽었나: 예. 폴더 목록을 다시 보고 tools.py, observe_1일차.txt 를 또 읽음
+   3-2. 실행한 명령이 2번과 같았나: 일부 다름. python 명령은 같았지만 파일 목록 명령이 달랐음 (Get-ChildItem -Recurse -File → Get-ChildItem -Force)
+   3-3. 권한 요청 횟수: 1번 (python 실행 명령)
 
-4. 빈칸본을 실행했을 때 마지막 줄 (8단계):
+4. 빈칸본을 실행했을 때 마지막 줄 (8단계): [빈칸 1] 여기까지 진행됨 → 28, 29번째 줄을 채울 것. 지금 args = ['rank', '20261114']
 
 5. 빈칸 2까지 채운 뒤 (10단계)
-   5-1. rank 결과:
-   5-2. audience 결과:
+   5-1. rank 결과: 극장판 치이카와: 인어 섬의 비밀
+   5-2. audience 결과: 57,190명
 
-6. 스킬 목록에 boxoffice 와 내가 쓴 설명이 나왔나 (12단계):
+6. 스킬 목록에 boxoffice 와 내가 쓴 설명이 나왔나 (12단계): 예. 32개 스킬 중 "boxoffice: 영화진흥위원회(KOBIS) 일별 박스오피스를 조회함. 특정 날짜의 1위 영화나 관객 수를 물을 때 씀" 으로 나옴
 
 7. 스킬을 설치한 뒤 같은 질문 (13단계)
-   7-1. 스킬이 쓰였나:
-   7-2. 읽은 파일:
-   7-3. 권한 요청 횟수:
-   7-4. 실행한 명령:
+   7-1. 스킬이 쓰였나: 예. 스킬 이름을 말하지 않았는데 Skill(boxoffice) 를 불러옴
+   7-2. 읽은 파일: 폴더 목록을 보고 tools.py 를 먼저 읽은 뒤 스킬을 불러옴 (스킬 SKILL.md 본문이 대화에 들어옴)
+   7-3. 권한 요청 횟수: 1번 (스킬 스크립트 실행 명령)
+   7-4. 실행한 명령: .venv\Scripts\python.exe .claude/skills/boxoffice/scripts/boxoffice.py rank 20261114 → 극장판 치이카와: 인어 섬의 비밀
 
-8. /boxoffice 로 물었을 때 스크립트가 몇 번, 어떤 순서로 실행됐나 (14단계):
+8. /boxoffice 로 물었을 때 스크립트가 몇 번, 어떤 순서로 실행됐나 (14단계): 2번. ① python .claude/skills/boxoffice/scripts/boxoffice.py rank 20261114 → 극장판 치이카와: 인어 섬의 비밀 ② python .claude/skills/boxoffice/scripts/boxoffice.py audience 20261114 "극장판 치이카와: 인어 섬의 비밀" → 57,190명. 파일 탐색이나 tools.py 읽기 없이 바로 스크립트만 실행함

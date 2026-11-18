@@ -25,17 +25,17 @@ if len(args) < 2:
 
 # [빈칸 1] args 에서 할 일(rank 또는 audience)과 날짜를 꺼내기
 #          args 는 리스트. 첫 번째 칸이 할 일, 두 번째 칸이 날짜
-command = None
-date = None
+command = args[0]
+date = args[1]
 if command is None or date is None:
     stop_at_blank(1, f"28, 29번째 줄을 채울 것. 지금 args = {args}")
 
 # [빈칸 2] 할 일에 맞는 tools.py 함수를 불러 결과를 result 에 담기
 #          rank 면 1위 제목, audience 면 세 번째 칸의 영화 제목으로 관객 수
 if command == "rank":
-    result = None
+    result = tools.get_boxoffice_rank_1(date)
 elif command == "audience" and len(args) >= 3:
-    result = None
+    result = tools.get_movie_audience(date, args[2])
 else:
     result = "쓰는 법: boxoffice.py rank 날짜 / boxoffice.py audience 날짜 영화제목"
 if result is None:
